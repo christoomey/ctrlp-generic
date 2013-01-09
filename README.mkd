@@ -1,0 +1,53 @@
+# CtrlP Generic
+
+[CtrlP][] is a file navigation plugin for Vim that supports fuzzy filename matching
+similar to [Command-T][], but is written entirely in vimscript. This plugin,
+[CtrlP Generic][], is an extension to CtrlP that provides a generic interface
+to the CtrlP fuzzy matching window. Using this plugin you can support CtrlP
+style fuzzy selection from any generic list.
+
+## Installation
+
+The recommended installation for this plugin is via [Vundle][] using the
+following steps:
+
+1. Add the bundle directive to your vimrc **after** the CtrlP directive as shown below:
+1. Source the vimrc file to read in the bundle directive `:source $MYVIMRC`
+1. Run the Vundle install command with `:BundleInstall`
+
+This will git clone the plugin repository into ~/.vim/bundles, activate the
+plugin, and run `:helptags` on it. From there you are all set to use it.
+
+**Note**, since CtrlP-Generic is implemented as an extension to CtrlP, you must
+also have CtrlP installed and it should appear before CtrlP-Generic in your
+vimrc:
+
+*Sample vimrc*:
+``` vim
+Bundle "kien/ctrlp.vim"
+Bundle "christoomey/ctrlp-generic"
+```
+
+## Usage
+
+Since CtrlP's match window is asynchronous, CtrlP-Generic requires the use of a
+callback function. CtrlPGeneric provides a single function as its interface.
+This function, aptly named `CtrlPGeneric`, takes two arguments:
+
+- **Options** - A Vim list containing the items to be selected from
+- **Callback** - The name of the callback function which CtrlP will call after
+  an item has been selected or the CtrlP selection window has been canceled. The
+  selected item will be passed to this callback function.
+
+``` vim
+call CtrlPGeneric(a_vim_list, 'MyGreatCallback')
+
+function! MyGreatCallback(selected_value)
+    echo "You selected: " . a:selected_value
+endfunction
+```
+
+[Vundle]: https://github.com/gmarik/vundle
+[CtrlP]: http://kien.github.com/ctrlp.vim/
+[Command-T]: https://wincent.com/products/command-t
+[CtrlP Generic]: https://github.com/christoomey/ctrlp-generic
