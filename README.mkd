@@ -35,17 +35,19 @@ callback function. CtrlPGeneric provides a single function as its interface.
 This function, aptly named `CtrlPGeneric`, takes two arguments:
 
 - **Options** - A Vim list containing the items to be selected from
-- **Callback** - The name of the callback function which CtrlP will call after
-  an item has been selected or the CtrlP selection window has been canceled. The
-  selected item will be passed to this callback function.
+- **Callback** - The name of the function CtrlP will call with the selected
+  value from the provided Options list.
 
 ``` vim
 call CtrlPGeneric(a_vim_list, 'MyGreatCallback')
 
-function! MyGreatCallback(selected_value)
+function! MyGreatCallback(selected_value) range
     echo "You selected: " . a:selected_value
 endfunction
 ```
+
+**Callback function notes** - The callback function must be glabal and must be
+defined to accept a range, as shown above.
 
 [Vundle]: https://github.com/gmarik/vundle
 [CtrlP]: http://kien.github.com/ctrlp.vim/

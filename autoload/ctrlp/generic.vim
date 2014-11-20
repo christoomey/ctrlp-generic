@@ -25,7 +25,8 @@ endfunc
 
 function! ctrlp#generic#accept(mode, str)
   call ctrlp#exit()
-  execute "call " . g:ctrlp_generic_callback . "(a:str)"
+  let range = g:ctrlp_generic_range[0] . "," . g:ctrlp_generic_range[1]
+  execute  range . "call " . g:ctrlp_generic_callback . "(a:str)"
 endfunction
 
 function! ctrlp#generic#exit()
